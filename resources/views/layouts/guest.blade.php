@@ -19,5 +19,6 @@
         <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             {{ $slot }}
         </div>
+        @include('components.footer-guest')
     </body>
 </html>

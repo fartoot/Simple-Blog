@@ -1,4 +1,4 @@
-<div class="bg-white py-5 sm:py-5">
+<div class="bg-white pt-5 sm:pt-5">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div role="list"
             class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -43,7 +43,7 @@
             @endforeach
         </div>
     </div>
-    <div class="py-12 mx-auto">
+    <div class="pt-14 pb-5 mx-auto">
         {{ $posts->links('pagination::simple-tailwind') }}
     </div>
 
