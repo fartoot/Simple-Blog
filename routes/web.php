@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,26 +16,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get("/welcome",function(){
+//     return view("welcome");
+// });
+
+
+
+
+Route::get("/",[PostController::class,'index'])->middleware('guest')->name('home');
+Route::get('/post/{post:slug}', [PostController::class, 'show'])->name("posts.show");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource("posts",PostController::class)->except(["show"]);
+    
+    Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
 });
+    
+    
+
+
+Route::get("/about", function(){
+    return view("pages.about");    
+})->name("about");
+
+Route::get("/contact", function(){
+    return view("pages.contact");    
+})->name("contact");
+
+Route::get("/privacy-policy", function(){
+    return view("pages.privacy");    
+})->name("privacy");
+
+
+
+
+
+
 
 // test routes
-
-Route::get("/team",function(){
-    return "team";
-})->name("team");
-
 Route::get("/projects",function(){
     return "projects";
 })->name("projects");
@@ -49,6 +76,5 @@ Route::get("/documents",function(){
 Route::get("/reports",function(){
     return "reports";
 })->name("reports");
-
 
 require __DIR__.'/auth.php';

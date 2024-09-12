@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }} class="h-full bg-white"">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,50 +14,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="h-full">
-    <div>
-        <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-        <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
-            <!--
-                Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+        <div id="menu-close" class="relative z-50 hidden" role="dialog" aria-modal="true">
 
-                Entering: "transition-opacity ease-linear duration-300"
-                    From: "opacity-0"
-                    To: "opacity-100"
-                Leaving: "transition-opacity ease-linear duration-300"
-                    From: "opacity-100"
-                    To: "opacity-0"
-                -->
-            <div class="fixed inset-0 bg-gray-900/80"></div>
+            <div class="fixed inset-0 bg-gray-900/80 transition-opacity ease-linear duration-300"></div>
 
             <div class="fixed inset-0 flex">
-                <!--
-                    Off-canvas menu, show/hide based on off-canvas menu state.
 
-                    Entering: "transition ease-in-out duration-300 transform"
-                    From: "-translate-x-full"
-                    To: "translate-x-0"
-                    Leaving: "transition ease-in-out duration-300 transform"
-                    From: "translate-x-0"
-                    To: "-translate-x-full"
-                -->
-                <div class="relative mr-16 flex w-full max-w-xs flex-1">
-                    <!--
-                    Close button, show/hide based on off-canvas menu state.
+                <div id="layer-2" class="relative mr-16 flex w-full max-w-xs flex-1">
 
-                    Entering: "ease-in-out duration-300"
-                        From: "opacity-0"
-                        To: "opacity-100"
-                    Leaving: "ease-in-out duration-300"
-                        From: "opacity-100"
-                        To: "opacity-0"
-                    -->
                     <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-                        <button type="button" class="-m-2.5 p-2.5">
+                        <button id="sidebar-toggle" type="button" class="-m-2.5 p-2.5 ease-in-out duration-300">
                             <span class="sr-only">Close sidebar</span>
                             <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true">
@@ -68,13 +38,12 @@
                     </div>
 
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
-                        <div class="flex h-16 shrink-0 items-center">
+                    <div class="flex grow flex-col overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
+                        <div class="flex h-28 shrink-0 items-center">
                             <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
+                            <div class="shrink-0 mx-auto flex items-center">
                                 <a href="{{ route('dashboard') }}">
-                                    <x-application-logo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <x-application-logo />
                                 </a>
                             </div>
                         </div>
@@ -83,8 +52,7 @@
                                 <li>
                                     <ul role="list" class="-mx-2 space-y-1">
                                         <li>
-                                            <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                            <a href="#"
+                                            <a href="{{ route('dashboard') }}"
                                                 class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -98,13 +66,13 @@
 
 
                                         <li>
-                                            <x-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                                            <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                                 </svg>
-                                                Team
+                                                Posts
                                             </x-nav-link>
                                         </li>
                                         <li>
@@ -174,13 +142,12 @@
         <!-- Static sidebar for desktop -->
         <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
-                <div class="flex h-16 shrink-0 items-center">
+            <div class="flex grow flex-col overflow-y-auto bg-gray-900 px-6 pb-4">
+                <div class="flex h-28 shrink-0 items-center">
                     <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
+                    <div class="shrink-0 mx-auto flex items-center">
                         <a href="{{ route('dashboard') }}">
-                            <x-application-logo
-                                class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            <x-application-logo />
                         </a>
                     </div>
 
@@ -202,13 +169,13 @@
                                 </li>
 
                                 <li>
-                                    <x-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                         </svg>
-                                        Team
+                                        Posts
                                     </x-nav-link>
 
                                 </li>
@@ -287,15 +254,76 @@
         <div class="lg:pl-72">
             @include('layouts.navigation')
 
-
             <main class="py-10">
+                @if (session('success'))
+                        <div class="rounded-md bg-green-50 p-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-green-800">{{session('success')}}</p>
+                                </div>
+                                <div class="ml-auto pl-3">
+                                    <div class="-mx-1.5 -my-1.5">
+                                        <button type="button"
+                                            class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">
+                                            <span class="sr-only">Dismiss</span>
+                                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif (session('error'))
+                        <div class="rounded-md bg-rose-50 p-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-rose-400" viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-rose-800">{{session('error')}}</p>
+                                </div>
+                                <div class="ml-auto pl-3">
+                                    <div class="-mx-1.5 -my-1.5">
+                                        <button type="button"
+                                            class="inline-flex rounded-md bg-rose-50 p-1.5 text-rose-500 hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-600 focus:ring-offset-2 focus:ring-offset-rose-50">
+                                            <span class="sr-only">Dismiss</span>
+                                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path
+                                                    d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="bg-white py-10">
+                        <div class="mx-auto max-w-7xl">
+                            <div class="px-4 sm:px-6 lg:px-8">
                     <!-- Your content -->
                     {{ $slot }}
                 </div>
             </main>
         </div>
-    </div>
+        </div>
+        </div>
+        </div>
 
 
 
@@ -317,6 +345,45 @@
                 {{ $slot }}
             </main> -->
     <!-- </div> -->
+
+
+<script>
+document.querySelectorAll('#sidebar-toggle').forEach(function(button) {
+  button.addEventListener("click", function(e) {
+    document.getElementById('menu-close').classList.toggle("hidden")
+        // y = e.target
+    // if (y.classList.contains("opacity-0")){
+
+    //     y.classList.remove("opacity-0")
+    //     y.classList.add("opacity-100")
+        
+    // }else{
+    //     y.classList.remove("opacity-100")
+    //     y.classList.add("opacity-0")
+
+    // }
+    
+    
+    // // e.target.classList.toggle("hidden")
+    // // document.getElementById('menu-close').classList.toggle("hidden")
+    
+    
+    // x = document.getElementById('layer-2')
+    
+    // if (x.classList.contains("-translate-x-full")){
+    //     x.classList.remove("-translate-x-full")
+    //     x.classList.add("translate-x-0")
+    // }else{
+
+    //     x.classList.add("-translate-x-full")
+    //     x.classList.remove("translate-x-0")
+    // }
+    
+});
+});
+
+
+</script>
 </body>
 
 </html>

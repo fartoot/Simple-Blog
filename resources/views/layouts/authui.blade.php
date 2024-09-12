@@ -14,10 +14,16 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        @include('components.navbar-guest')
-        <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <body class="font-sans text-gray-900 h-full">
+        <div class="flex  flex-col  h-screen justify-center px-6 py-12 lg:px-8">
+            <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+              <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+              <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+            </div>
+          
+            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             {{ $slot }}
+            </div>
         </div>
     </body>
 </html>
