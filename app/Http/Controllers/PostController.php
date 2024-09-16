@@ -20,7 +20,7 @@ class PostController extends Controller
             $posts = Post::latest()->paginate(10);
             return view('posts.auth.index')->with('posts', $posts);
         } else {
-            $posts = Post::latest()->paginate(11);
+            $posts = Post::where('status',true)->latest()->paginate(11);
             return view('posts.guest.index')->with('posts', $posts);
         }
     }
