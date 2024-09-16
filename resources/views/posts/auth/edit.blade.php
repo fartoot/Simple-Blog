@@ -3,65 +3,68 @@
         @csrf
         @method('PUT')
         <div class="space-y-12">
-
-            {{-- upload blog image --}}
-            {{-- <div class="col-span-full">
-            <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
-            <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div class="text-center">
-                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-                </svg>
-                <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                    </label>
-                    <p class="pl-1">or drag and drop</p>
-                </div>
-                <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                </div>
-            </div>
-            </div> --}}
-
-
             <div class="border-b border-gray-900/10 pb-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Edit Post
-                </h2>
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Edit Post </h2>
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="col-span-full">
+                        <div class="py-8 text-center" x-data="{ imagePreview: '', showPreview: false }">
+                            <div class="max-w-4xl mx-auto text-center space-y-5 p-14 border-2 border-violet-100 border-dashed shadow-sm rounded-3xl">
+                                <div class="flex items-center justify-center bg-grey-lighter">
+                                    <label
+                                        class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-full shadow-md  uppercase cursor-pointer hover:bg-blue hover:text-violet-400 text-violet-600">
+                                        <svg class="w-8 h-8" fill="#4F46E5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                        </svg>
+                                        <span class="mt-2 text-base leading-normal">Select a file</span>
+                                        <input type="file" id="image" name="image" class="mx-auto hidden"
+                                            x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])">
+                                    </label>
+                                </div>
+
+                                <div x-show="showPreview" class="w-full text-center py-6">
+                                    <img :src="imagePreview" alt="Preview"
+                                        class="max-w-full mx-auto rounded-md bg-cover">
+                                </div>
+                                <button type="button" x-show="showPreview" @click.prevent="showPreview = false; $refs.image.value = ''"
+                                    class="bg-violet-100 text-violet-800 rounded-full shadow w-12 h-12">
+                                    <div>X</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-full h-96 mb-6 ">
+                        <label for="featured_image" class="text-sm font-medium leading-6 text-gray-900">Featured
+                            Image</label>
+                        <img class="h-full w-full object-cover object-center rounded-2xl mt-2"
+                            src="{{ asset('images/' . $post->featured_image) }}" alt="">
+                    </div>
+                    <div class="col-span-full">
                         <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
-                        <div class="mt-2">
-                            <input id="title" name="title" type="text" autocomplete="title"
-                                value="{{ $post->title }}"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        </div>
+                        <input id="title" name="title" type="text" autocomplete="title"
+                            value="{{ $post->title }}"
+                            class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
 
                     <div class="col-span-full">
-                        <label for="slug" class="block text-sm font-medium leading-6 text-gray-900">slug</label>
-                        <div class="mt-2">
-                            <input id="slug" name="slug" type="text" autocomplete="slug"
-                                value="{{ $post->slug }}"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        </div>
+                        <label for="slug" class="block text-sm font-medium leading-6 text-gray-900">Slug</label>
+                        <input id="slug" name="slug" type="text" autocomplete="slug"
+                            value="{{ $post->slug }}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
 
                     <div class="col-span-full">
-                        <label for="excerpt" class="block text-sm font-medium leading-6 text-gray-900">excerpt</label>
-                        <div class="mt-2">
-                            <textarea rows="3" name="excerpt" id="excerpt"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $post->excerpt }}</textarea>
-                        </div>
+                        <label for="excerpt" class="block text-sm font-medium leading-6 text-gray-900">Excerpt</label>
+                        <textarea rows="3" name="excerpt" id="excerpt"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $post->excerpt }}</textarea>
                     </div>
 
 
                     <div class="col-span-full">
                         <label for="content" class="block text-sm font-medium leading-6 text-gray-900">Content</label>
-                        <div class="mt-2">
-                            <textarea rows="8" name="content" id="content"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ trim($post->content) }}</textarea>
-                        </div>
+                        <textarea rows="8" name="content" id="content"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ trim($post->content) }}</textarea>
                     </div>
                 </div>
             </div>
@@ -70,13 +73,11 @@
             {{-- <div class="sm:col-span-3 border-b border-gray-900/10 pb-12">
                             <label for="country"
                                 class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                            <div class="mt-2">
                                 <select id="country" name="country" autocomplete="country-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                     <option>Publish</option>
                                     <option>Draft</option>
                                 </select>
-                            </div>
                         </div> --}}
 
             <div class="flex items-center justify-end gap-x-6">
@@ -85,6 +86,7 @@
                 <button type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
             </div>
+        </div>
         </div>
     </form>
 

@@ -3,31 +3,36 @@
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="space-y-12">
-
-            {{-- upload blog image --}}
-            {{-- <div class="col-span-full">
-            <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
-            <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div class="text-center">
-                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-                </svg>
-                <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                    </label>
-                    <p class="pl-1">or drag and drop</p>
-                </div>
-                <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                </div>
-            </div>
-            </div> --}}
-
-
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Post Creation
                 </h2>
+
+                <div class="py-8 text-center" x-data="{ imagePreview: '', showPreview: false }">
+                    <div
+                        class="max-w-4xl mx-auto text-center p-14 border-2 border-violet-100 border-dashed shadow-sm rounded-3xl">
+                        <div class="flex items-center justify-center bg-grey-lighter">
+                            <label
+                                class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-full shadow-md  uppercase cursor-pointer hover:bg-blue hover:text-violet-400 text-violet-600">
+                                <svg class="w-8 h-8" fill="#4F46E5" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                </svg>
+                                <span class="mt-2 text-base leading-normal">Select a file</span>
+                                <input type="file" id="image" name="image" class="mx-auto hidden"
+                                    x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])">
+                            </label>
+                        </div>
+
+                        <div x-show="showPreview" class="w-full text-center my-6">
+                            <img :src="imagePreview" alt="Preview" class="max-w-full mx-auto h-auto rounded-md"">
+                        </div>
+                        <button x-show="showPreview" @click.prevent="showPreview = false; $refs.image.value = ''"
+                            class="bg-violet-100 text-violet-800 rounded-full shadow w-12 h-12">
+                            <div>X</div>
+                        </button>
+                    </div>
+                </div>
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="col-span-full">
                         <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
