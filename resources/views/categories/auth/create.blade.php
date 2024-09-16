@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <form method="post" action="{{ route('category.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">

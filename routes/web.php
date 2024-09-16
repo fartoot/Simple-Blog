@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
             return view('dashboard');
         })->name('dashboard');
 
-    Route::resource('category', CategoryController::class);
+    Route::resource('categories', CategoryController::class);
 
 });
     

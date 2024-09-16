@@ -13,7 +13,7 @@
                 description.</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <a href="{{ route('category.create') }}"
+            <a href="{{ route('categories.create') }}"
                 class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add
                     category</a>
         </div>
@@ -52,7 +52,7 @@
                         <td
                             class="whitespace-nowrap flex justify-center
                                  py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-0">
-                            <a href="{{ route('category.edit', $category) }}"
+                            <a href="{{ route('categories.edit', $category) }}"
                                 class="text-indigo-600 px-2 hover:text-indigo-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="ml-2 mt-0 w-4 h-4">
@@ -60,7 +60,7 @@
                                         d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                 </svg>
                             </a>
-                            <form method="POST" action="{{ route('category.destroy', $category) }}">
+                            <form method="POST" action="{{ route('categories.destroy', $category) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button class="text-indigo-600 px-2 hover:text-indigo-600" type="submit">

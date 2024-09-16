@@ -75,7 +75,7 @@
                                             </x-nav-link>
                                         </li>
                                         <li>
-                                            <x-nav-link :href="route('category.index')" :active="request()->routeIs('caterody.index')">
+                                            <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -180,7 +180,7 @@
                                 </li>
 
                                 <li>
-                                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round"

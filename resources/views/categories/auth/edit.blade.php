@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form method="post" action="{{ route('category.update', $category) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('categories.update', $category) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="space-y-12">

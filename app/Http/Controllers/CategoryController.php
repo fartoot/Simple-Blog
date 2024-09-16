@@ -56,7 +56,7 @@ class CategoryController extends Controller
         }
 
         return redirect()
-            ->route('category.index')
+            ->route('categories.index')
             ->with([
                 'success' => 'Post added successfully!',
             ]);
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         } catch (Exception $e) {
             return back()->with('error', 'Category not updated!');
         }
-        return redirect()->route('category.index')->with('success', 'Category has been updated!');
+        return redirect()->route('categories.index')->with('success', 'Category has been updated!');
     }
 
     /**
@@ -104,8 +104,8 @@ class CategoryController extends Controller
         try {
             $category->delete();
         } catch (Exception $e) {
-            return redirect()->route('category.index')->with('error', 'Category not deleted !');
+            return redirect()->route('categories.index')->with('error', 'Category not deleted !');
         }
-        return redirect()->route('category.index')->with('success', 'Category has been deleted !');
+        return redirect()->route('categories.index')->with('success', 'Category has been deleted !');
     }
 }
