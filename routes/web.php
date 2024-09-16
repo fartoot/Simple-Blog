@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -36,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
+
+    Route::resource('category', CategoryController::class);
 
 });
     
