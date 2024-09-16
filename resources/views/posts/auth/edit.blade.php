@@ -8,7 +8,8 @@
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="col-span-full">
                         <div class="py-8 text-center" x-data="{ imagePreview: '', showPreview: false }">
-                            <div class="max-w-4xl mx-auto text-center space-y-5 p-14 border-2 border-violet-100 border-dashed shadow-sm rounded-3xl">
+                            <div
+                                class="max-w-4xl mx-auto text-center space-y-5 p-14 border-2 border-violet-100 border-dashed shadow-sm rounded-3xl">
                                 <div class="flex items-center justify-center bg-grey-lighter">
                                     <label
                                         class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-full shadow-md  uppercase cursor-pointer hover:bg-blue hover:text-violet-400 text-violet-600">
@@ -27,7 +28,8 @@
                                     <img :src="imagePreview" alt="Preview"
                                         class="max-w-full mx-auto rounded-md bg-cover">
                                 </div>
-                                <button type="button" x-show="showPreview" @click.prevent="showPreview = false; $refs.image.value = ''"
+                                <button type="button" x-show="showPreview"
+                                    @click.prevent="showPreview = false; $refs.image.value = ''"
                                     class="bg-violet-100 text-violet-800 rounded-full shadow w-12 h-12">
                                     <div>X</div>
                                 </button>
@@ -66,19 +68,17 @@
                         <textarea rows="8" name="content" id="content"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ trim($post->content) }}</textarea>
                     </div>
+                    <div class="sm:col-span-3">
+                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
+                        <select id="status" name="status" 
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option>Publish</option>
+                            <option>Draft</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            {{-- post status --}}
-            {{-- <div class="sm:col-span-3 border-b border-gray-900/10 pb-12">
-                            <label for="country"
-                                class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                                <select id="country" name="country" autocomplete="country-name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                    <option>Publish</option>
-                                    <option>Draft</option>
-                                </select>
-                        </div> --}}
 
             <div class="flex items-center justify-end gap-x-6">
                 <a href="{{ URL::previous() }}" type="button"

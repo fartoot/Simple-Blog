@@ -18,10 +18,10 @@ class PostController extends Controller
     {
         if (auth()->check()) {
             $posts = Post::latest()->paginate(10);
-            return view("posts.auth.index")->with("posts", $posts);
+            return view('posts.auth.index')->with('posts', $posts);
         } else {
             $posts = Post::latest()->paginate(11);
-            return view("posts.guest.index")->with("posts", $posts);
+            return view('posts.guest.index')->with('posts', $posts);
         }
     }
 
@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.auth.create");
+        return view('posts.auth.create');
     }
 
     /**
@@ -40,24 +40,35 @@ class PostController extends Controller
     {
         // todo : validate request data
 
-        $path = Storage::putFile("public/images", $request->file("image"));
-        $filename = basename($path);
         try {
             $post = new Post();
-            $post->title = $request->input("title");
+
+            if (strtolower($request->input('status')) == 'publish') {
+                $post->status = true;
+            } else {
+                $post->status = false;
+            }
+            
+            if (!empty($request->file('image'))) {
+                $path = Storage::putFile('public/images', $request->file('image'));
+                $filename = basename($path);
+                $post->featured_image = $filename;
+            }else{
+                $post->featured_image = '';
+            }
+            $post->title = $request->input('title');
             $post->slug = Str::slug($post->title);
-            $post->content = $request->input("content");
-            $post->excerpt = Str::words($post->content, 25, " ...");
-            $post->featured_image = $filename;
+            $post->content = $request->input('content');
+            $post->excerpt = Str::words($post->content, 25, ' ...');
             $post->save();
         } catch (Exception $e) {
-            return back()->with("error", "Post not added!");
+            return back()->with('error', 'Post not added!');
         }
 
         return redirect()
-            ->route("posts.index")
+            ->route('posts.index')
             ->with([
-                "success" => "Post added successfully!",
+                'success' => 'Post added successfully!',
             ]);
     }
 
@@ -66,7 +77,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view("posts.guest.show")->with("post", $post);
+        return view('posts.guest.show')->with('post', $post);
     }
 
     /**
@@ -74,7 +85,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("posts.auth.edit")->with("post", $post);
+        return view('posts.auth.edit')->with('post', $post);
         // $founded = Post::find($post);
     }
 
@@ -83,18 +94,22 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $path = Storage::putFile("public/images", $request->file("image"));
-        $filename = basename($path);
-        
         try {
-            $request->merge(['featured_image' => $filename ]);
+            if (!empty($request->file('image'))) {
+                $path = Storage::putFile('public/images', $request->file('image'));
+                $filename = basename($path);
+                $request->merge(['featured_image' => $filename]);
+            }
+            if (strtolower($request->input('status')) == 'publish') {
+                $request->merge(['status' => true]);
+            } else {
+                $request->merge(['status' => false]);
+            }
             $post->update($request->all());
         } catch (Exception $e) {
-            return back()->with("error", "Post not updated!");
+            return back()->with('error', 'Post not updated!');
         }
-        return redirect()
-            ->route("posts.index")
-            ->with("success", "Post has been updated!");
+        return redirect()->route('posts.index')->with('success', 'Post has been updated!');
     }
 
     /**
@@ -105,12 +120,8 @@ class PostController extends Controller
         try {
             $post->delete();
         } catch (Exception $e) {
-            return redirect()
-                ->route("posts.index")
-                ->with("error", "Post not deleted !");
+            return redirect()->route('posts.index')->with('error', 'Post not deleted !');
         }
-        return redirect()
-            ->route("posts.index")
-            ->with("success", "Post has been deleted !");
+        return redirect()->route('posts.index')->with('success', 'Post has been deleted !');
     }
 }

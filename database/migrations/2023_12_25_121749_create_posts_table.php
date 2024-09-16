@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string("slug",100)->unique();
             $table->tinyText("excerpt");
             $table->text("content");
+            $table->string("featured_image");
+            $table->boolean("status");
             $table->timestamps();
         });
     }

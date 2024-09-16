@@ -20,7 +20,9 @@ class PostFactory extends Factory
             "title" => fake()->sentence(6),
             "slug" => fake()->slug(8),
             'excerpt' => fake()->text(200),
-            'content' => fake()->text(800)
+            'content' => fake()->text(800),
+            'featured_image' => '',
+            'status' => fake()->boolean()
         ];
     }
 }

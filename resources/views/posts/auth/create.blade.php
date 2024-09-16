@@ -49,21 +49,21 @@
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
+                    <div class="sm:col-span-3">
+                        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
+                        <div class="mt-2">
+                            <select id="status" name="status"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <option>Publish</option>
+                                <option>Draft</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {{-- post status --}}
-            {{-- <div class="sm:col-span-3 border-b border-gray-900/10 pb-12">
-                            <label for="country"
-                                class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                            <div class="mt-2">
-                                <select id="country" name="country" autocomplete="country-name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                    <option>Publish</option>
-                                    <option>Draft</option>
-                                </select>
-                            </div>
-                        </div> --}}
+
 
             <div class="flex items-center justify-end gap-x-6">
                 <a href="{{ URL::previous() }}" type="button"
