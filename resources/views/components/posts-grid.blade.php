@@ -5,7 +5,7 @@
             @foreach ($posts->take(2) as $key => $post)
                 <a href="/post/{{ $post->slug }}">
                     <img class="aspect-[3/2] w-full rounded-xl object-cover hover:scale-105 hover:transition-all"
-                        src="https://picsum.photos/700/800?random={{ $key }}" alt="">
+                        src="{{ asset('images/'.$post->featured_image) }}" alt="">
                     <h2 class="mt-6 text-2xl font-bold leading-8 tracking-tight text-gray-900">
                         {{ Str::upper($post->title) }}</h2>
                     <div class="flex items-center mt-6 text-gray-500 ">
@@ -27,7 +27,7 @@
             @foreach ($posts->slice(2) as $key => $post)
                 <a href="/post/{{ $post->slug }}" class="flex flex-col">
                     <img class="aspect-[3/2] w-full rounded-2xl object-cover hover:scale-105 hover:transition-all"
-                        src="https://picsum.photos/400/500?random={{ $key }}" alt="">
+                        src="{{ asset('images/'.$post->featured_image) }}" alt="">
                     <h3 class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">{{ ucwords($post->title) }}
                     </h3>
                     <p class="text-base leading-7 text-gray-600 grow">{{ Str::limit($post->excerpt, 100) }}</p>

@@ -12,7 +12,7 @@
         </div>
         
         <div class="h-80">
-            <img class="h-full w-full object-cover object-center rounded-2xl" src="https://picsum.photos/1000/1000" alt="">
+            <img class="h-full w-full object-cover object-center rounded-2xl" src="{{ asset('images/'.$post->featured_image) }}" alt="">
         </div>
         <p>
             {{ $post->content }}
