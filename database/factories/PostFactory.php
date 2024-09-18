@@ -22,6 +22,7 @@ class PostFactory extends Factory
             'excerpt' => fake()->text(200),
             'content' => fake()->text(800),
             'featured_image' => '',
+            'category_id' => fake()->numberBetween(1,5),
             'status' => fake()->boolean()
         ];
     }

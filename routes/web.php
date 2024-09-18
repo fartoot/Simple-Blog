@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/",[PostController::class,'index'])->middleware('guest')->name('home');
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name("posts.show");
+Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
+Route::get('/category', [CategoryController::class, 'index'])->name("category.index");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,9 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
-
-    Route::resource('categories', CategoryController::class);
-
+    
+    Route::resource('categories', CategoryController::class)->except(["show"]);
 });
     
     
@@ -64,9 +65,6 @@ Route::get("/privacy-policy", function(){
 
 
 // test routes
-Route::get("/projects",function(){
-    return "projects";
-})->name("projects");
 
 Route::get("/calendar",function(){
     return "calendar";

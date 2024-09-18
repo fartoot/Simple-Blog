@@ -19,7 +19,7 @@ class CategoryController extends Controller
             $categories = Category::latest()->paginate(10);
             return view('categories.auth.index')->with('categories', $categories);
         } else {
-            $categories = Category::where('status', true)->latest()->paginate(11);
+            $categories = Category::latest()->paginate(11);
             return view('categories.guest.index')->with('categories', $categories);
         }
     }
@@ -67,7 +67,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $posts = $category->posts()->latest()->paginate(9);
+        return view('categories.guest.show')->with('category', $category)->with('posts', $posts);
     }
 
     /**
@@ -91,6 +92,7 @@ class CategoryController extends Controller
             }
             $category->update($request->all());
         } catch (Exception $e) {
+            dd($e);
             return back()->with('error', 'Category not updated!');
         }
         return redirect()->route('categories.index')->with('success', 'Category has been updated!');

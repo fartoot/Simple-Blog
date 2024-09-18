@@ -19,6 +19,7 @@
             </div>
             <div class="hidden lg:flex lg:gap-x-12">
                 <a href="{{ route('home') }}" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
+                <a href="{{ route('category.index') }}" class="text-sm font-semibold leading-6 text-gray-900">Categories</a>
                 <a href="{{ route('about') }}" class="text-sm font-semibold leading-6 text-gray-900">About</a>
                 <a href="{{ route('contact') }}" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
                 <a href="{{ route('privacy') }}" class="text-sm font-semibold leading-6 text-gray-900">Privacy</a>
@@ -52,6 +53,8 @@
                         <div class="space-y-2 py-6">
                             <a href="{{ route('home') }}"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</a>
+                            <a href="{{ route('category.index') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Categories</a>
                             <a href="{{ route('about') }}"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
                             <a href="{{ route('contact') }}"

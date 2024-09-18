@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text("content");
             $table->string("featured_image");
             $table->boolean("status");
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete("cascade");
             $table->timestamps();
         });
     }

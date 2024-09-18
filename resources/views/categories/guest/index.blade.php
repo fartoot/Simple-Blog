@@ -1,3 +1,3 @@
 <x-guest-layout>
-        @include('components.posts-grid')
+        @include('components.categories-grid')
 </x-guest-layout>
