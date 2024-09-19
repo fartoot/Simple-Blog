@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.auth.create');
+        $tags = Tag::all();
+        return view('posts.auth.create')->with("tags",$tags);
     }
 
     /**
@@ -39,10 +41,8 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         // todo : validate request data
-
         try {
             $post = new Post();
-
             if (strtolower($request->input('status')) == 'publish') {
                 $post->status = true;
             } else {
@@ -60,8 +60,11 @@ class PostController extends Controller
             $post->slug = Str::slug($post->title);
             $post->content = $request->input('content');
             $post->excerpt = Str::words($post->content, 25, ' ...');
+            $post->category_id = 1;
             $post->save();
+            $post->tags()->attach($request->input('tags'));
         } catch (Exception $e) {
+            dd($e);
             return back()->with('error', 'Post not added!');
         }
 

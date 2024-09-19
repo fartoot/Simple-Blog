@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
         })->name('dashboard');
     
     Route::resource('categories', CategoryController::class)->except(["show"]);
+    Route::resource('tags', TagController::class)->except(["show"]);
 });
     
     

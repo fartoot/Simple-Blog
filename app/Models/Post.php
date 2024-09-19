@@ -20,4 +20,8 @@ class Post extends Model
     public function Categories(){
         return $this->belongsTo(Category::class);
     }
+    
+    public function Tags(){
+        return $this->belongsToMany(Tag::class);
+    }
 }
