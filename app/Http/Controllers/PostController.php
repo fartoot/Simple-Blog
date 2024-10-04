@@ -89,9 +89,11 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Post $post)
-    {
-        return view('posts.auth.edit')->with('post', $post);
-        // $founded = Post::find($post);
+    {  
+        $tags = Tag::all();
+        $selectedTags = $post->tags->pluck('id')->all();
+        $categories = Category::all();
+        return view('posts.auth.edit')->with('post', $post)->with("tags",$tags)->with("categories",$categories)->with("selectedTags",$selectedTags);
     }
 
     /**
@@ -99,6 +101,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        // dd($request);
         try {
             if (!empty($request->file('image'))) {
                 $path = Storage::putFile('public/images', $request->file('image'));
@@ -110,6 +113,8 @@ class PostController extends Controller
             } else {
                 $request->merge(['status' => false]);
             }
+            $request->merge(['category_id' => $request->input('category')]);
+            $post->tags()->sync($request->input('tags'));
             $post->update($request->all());
         } catch (Exception $e) {
             return back()->with('error', 'Post not updated!');
