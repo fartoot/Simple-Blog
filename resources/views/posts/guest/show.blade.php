@@ -17,5 +17,13 @@
         <p>
             {{ $post->content }}
         </p>
+        
+        <div class="mt-2 space-x-2 flex">
+            @foreach ($post->tags as $key => $tag)
+                <a href="/tag/{{ $tag->slug }}" class="bg-gray-100 px-2 text-base">
+                    #{{ $tag->name }}
+                </a>
+            @endforeach
+        </div>
     </div>
 </x-guest-layout>
