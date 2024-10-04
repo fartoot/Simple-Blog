@@ -56,9 +56,10 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tag $tag)
     {
-        //
+        $posts = $tag->posts()->latest()->paginate(10);
+        return view('tags.guest.show')->with('posts', $posts)->with("tag",$tag);
     }
 
     /**

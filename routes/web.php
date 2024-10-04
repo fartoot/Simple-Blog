@@ -30,6 +30,8 @@ Route::get("/",[PostController::class,'index'])->middleware('guest')->name('home
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name("posts.show");
 Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
 Route::get('/category', [CategoryController::class, 'index'])->name("category.index");
+Route::get('/tag', [TagController::class, 'index'])->name("tag.index");
+Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name("tag.show");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
