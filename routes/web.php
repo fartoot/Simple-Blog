@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
@@ -39,9 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource("posts",PostController::class)->except(["show"]);
     
-    Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('categories', CategoryController::class)->except(["show"]);
     Route::resource('tags', TagController::class)->except(["show"]);

@@ -67,12 +67,12 @@
                                 @foreach ($tags as $tag)
                                     <div class="relative flex gap-x-3">
                                         <div class="flex h-6 items-center">
-                                            <input id="{{ $tag->id }}" value="{{ $tag->id }}" name="tags[]"
+                                            <input id="tag{{ $tag->id }}" value="{{ $tag->id }}" name="tags[]"
                                                 type="checkbox"
                                                 class="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-600">
                                         </div>
                                         <div class="text-sm leading-6">
-                                            <label for="candidates"
+                                            <label for="tag{{ $tag->id }}"
                                                 class="font-medium text-gray-900">{{ $tag->name }}</label>
                                         </div>
                                     </div>
