@@ -49,21 +49,35 @@
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
-                    <div class="col-span-full">
-                        <p class="block text-sm font-medium leading-6 text-gray-900">Tags</p>
-                        <div id="tags"
-                            class="overflow-y-auto h-32 p-1 sm:w-80 border rounded-md mt-2 border-gray-300">
-                            @foreach ($tags as $tag)
-                                <div class="relative flex gap-x-3">
-                                    <div class="flex h-6 items-center">
-                                        <input id="{{$tag->id}}" value="{{$tag->id}}" name="tags[]" type="checkbox"
-                                            class="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-600">
+                    <div class="col-span-full grid grid-cols-2 gap-x-10">
+                        <div>
+                            <p class="block text-sm font-medium leading-6 text-gray-900">Categories</p>
+                            <div id="categories" class="mt-2">
+                                    <select class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" name="category" id="category">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                        @endforeach
+                                    </select>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="block text-sm font-medium leading-6 text-gray-900">Tags</p>
+                            <div id="tags"
+                                class="overflow-y-auto h-32 p-1  border rounded-md mt-2 border-gray-300 grid md:grid-cols-2 2xl:grid-cols-3">
+                                @foreach ($tags as $tag)
+                                    <div class="relative flex gap-x-3">
+                                        <div class="flex h-6 items-center">
+                                            <input id="{{ $tag->id }}" value="{{ $tag->id }}" name="tags[]"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-600">
+                                        </div>
+                                        <div class="text-sm leading-6">
+                                            <label for="candidates"
+                                                class="font-medium text-gray-900">{{ $tag->name }}</label>
+                                        </div>
                                     </div>
-                                    <div class="text-sm leading-6">
-                                        <label for="candidates" class="font-medium text-gray-900">{{$tag->name}}</label>
-                                    </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="sm:col-span-3">

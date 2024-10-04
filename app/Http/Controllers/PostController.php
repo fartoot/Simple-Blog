@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Exception;
@@ -32,7 +33,8 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('posts.auth.create')->with("tags",$tags);
+        $categories = Category::all();
+        return view('posts.auth.create')->with("tags",$tags)->with("categories",$categories);
     }
 
     /**
@@ -60,7 +62,7 @@ class PostController extends Controller
             $post->slug = Str::slug($post->title);
             $post->content = $request->input('content');
             $post->excerpt = Str::words($post->content, 25, ' ...');
-            $post->category_id = 1;
+            $post->category_id = $request->input('category');
             $post->save();
             $post->tags()->attach($request->input('tags'));
         } catch (Exception $e) {
