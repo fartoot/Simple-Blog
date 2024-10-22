@@ -5,9 +5,12 @@
             @foreach ($categories as $key => $category)
                 <div class="relative">
                     <a href="/category/{{ $category->slug }}" class="flex flex-col hover:scale-105 hover:transition-all">
-                        <img class="aspect-[3/3] w-full rounded-full object-cover  brightness-50"
-                            src="{{ asset('images/' . $category->featured_image) }}" alt="">
-                        <!-- <span class="absolute bottom-2 left-3 bg-white/50 text-sm py-1 px-2 rounded-full text-gray-800">{{ ucwords($category->name) }}</span> -->
+                        @if ($category->featured_image)
+                            <img class="aspect-[3/3] w-full rounded-full object-cover brightness-50 bg-white"
+                                src="{{ asset('images/' . $category->featured_image) }}" alt="" >
+                        @else
+                            <span class="aspect-[3/3] w-full rounded-full object-cover brightness-50 bg-white"></span> 
+                        @endif
                         <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             <p class="text-2xl text-white font-bold text-center">{{ ucwords($category->name) }}</p>
                         </span>

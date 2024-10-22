@@ -18,7 +18,7 @@ class TagController extends Controller
             $tags = Tag::latest()->paginate(10);
             return view('tags.auth.index')->with('tags', $tags);
         } else {
-            $tags = Tag::latest()->paginate(11);
+            $tags = Tag::latest()->paginate(40);
             return view('tags.guest.index')->with('tags', $tags);
         }
     }

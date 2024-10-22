@@ -2,7 +2,7 @@
     <div class="max-w-7xl px-6 lg:px-8 flex justify-center">
         <div role="list" class="mt-20 flex flex-wrap gap-4">
             @foreach ($tags as $key => $tag)
-                <a href="/tag/{{ $tag->slug}}" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+                <a href="/tag/{{ $tag->slug}}" class="bg-violet-50 rounded-lg shadow-md p-6 flex flex-col">
                     <p class="text-lg font-black mx-auto my-auto text-violet-700 uppercase">#{{ $tag->name }}</p>
                 </a>
             @endforeach
