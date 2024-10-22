@@ -39,8 +39,13 @@
                     <div class="col-span-full h-96 mb-6 ">
                         <label for="featured_image" class="text-sm font-medium leading-6 text-gray-900">Featured
                             Image</label>
-                        <img class="h-full w-full object-cover object-center rounded-2xl mt-2"
-                            src="{{ asset('images/' . $post->featured_image) }}" alt="">
+                        
+                        @if($post->featured_image)
+                            <img class="h-full w-full object-cover object-center rounded-2xl mt-2" src="{{ asset('images/'.$post->featured_image) }}" alt="">
+                        @else
+                            <span class="h-full w-full block rounded-2xl bg-gradient-to-r from-violet-700 to-violet-400 mt-2" ></span>
+                        @endif
+                        
                     </div>
                     <div class="col-span-full">
                         <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
