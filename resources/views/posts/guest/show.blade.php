@@ -5,7 +5,7 @@
             <div class="flex justify-center">
                 <div class="text-center">
                     <img class="rounded-full h-10 w-10 mx-auto" src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
-                    <p class="text-center">Mario Sanchez</p>
+                    <p class="text-center">{{ $post->user->name }}</p>
                     <p class="text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
             </div>

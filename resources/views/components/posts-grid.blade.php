@@ -13,7 +13,7 @@
                         <div class="flex items-center gap-3">
                             <img class="rounded-full h-7 w-7"
                                 src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
-                            <p>Mario Sanchez</p>
+                            <p>{{ $post->user->name }}</p>
                         </div>
                         <div>{{ $post->created_at->diffForHumans() }}</div>
                     </div>

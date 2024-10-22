@@ -23,7 +23,8 @@ class PostFactory extends Factory
             'content' => fake()->text(800),
             'featured_image' => '',
             'category_id' => fake()->numberBetween(1,5),
-            'status' => fake()->boolean()
+            'status' => fake()->boolean(),
+            'user_id' => 1
         ];
     }
 }

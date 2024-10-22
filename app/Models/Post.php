@@ -16,6 +16,9 @@ class Post extends Model
         return 'slug';
     }
     
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
     
     public function Categories(){
         return $this->belongsTo(Category::class);
@@ -24,4 +27,6 @@ class Post extends Model
     public function Tags(){
         return $this->belongsToMany(Tag::class);
     }
+    
+    
 }
