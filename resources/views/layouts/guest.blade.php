@@ -14,9 +14,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased h-screen flex flex-col">
         @include('components.navbar-guest')
-        <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+        <div class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 grow">
             {{ $slot }}
         </div>
         @include('components.footer-guest')
