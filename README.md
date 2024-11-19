@@ -1,5 +1,3 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 # Simple Blog using Laravel
 
 A simple blog application built with Laravel, featuring categories, tags, about, contact, and privacy pages. Includes an admin dashboard for managing posts, categories, and tags.
@@ -21,16 +19,17 @@ A simple blog application built with Laravel, featuring categories, tags, about,
 ## Screenshots
 
 ### Public Pages
-[Homepage Screenshot]
-[Blog Post Screenshot]
-[Categories Page Screenshot]
-[Tags Page Screenshot]
+![Homepage](/preview/homepage.png)
+![Blog Post](/preview/blog-post.png)
+![Categories](/preview/categories.png)
+![Tags](/preview/tags.png)
+
 
 ### Admin Dashboard
-[Dashboard Overview Screenshot]
-[Posts Management Screenshot]
-[Categories Management Screenshot]
-[Tags Management Screenshot]
+
+![Dashboard](/preview/dashboard.png)
+![Posts](/preview/manage-posts.png)
+![Profile](/preview/profile.png)
 
 ## Admin Features
 
